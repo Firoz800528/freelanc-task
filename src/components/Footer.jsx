@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
-import { FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   const { user, logout } = useContext(AuthContext);
@@ -28,20 +28,19 @@ const Footer = () => {
     "font-bold border-b-2 border-gray-900 dark:border-white text-gray-900 dark:text-white";
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-8 mt-16">
+    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-10 mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-   
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+          
           <div>
-            <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-              Freelance<span className="text-[#432DD7]">Task</span> 
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+              Freelance<span className="text-[#432DD7]">Task</span>
             </h3>
             <p className="text-sm">
               Empowering freelancers and clients to collaborate and succeed.
             </p>
           </div>
 
-     
           <div>
             <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
             <ul className="space-y-1 text-sm">
@@ -55,8 +54,8 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/tasks"
-                  className={`${linkBase} ${isActive("/tasks") ? linkActive : ""}`}
+                  to="/browse-tasks"
+                  className={`${linkBase} ${isActive("/browse-tasks") ? linkActive : ""}`}
                 >
                   Browse Tasks
                 </Link>
@@ -69,7 +68,6 @@ const Footer = () => {
                   Add Task
                 </Link>
               </li>
-
               {!user ? (
                 <>
                   <li>
@@ -103,7 +101,17 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-2">Connect</h4>
+            <h4 className="text-lg font-semibold mb-2">Contact</h4>
+            <p className="text-sm">Email: info@freelancetask.com</p>
+            <p className="text-sm">Phone: +1 (555) 123-4567</p>
+            <p className="text-sm">Address: 123 Freelance St, Remote City</p>
+            <Link to="/terms" className="text-sm hover:underline font-bold block mt-2">
+              Terms & Conditions
+            </Link>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
             <div className="flex justify-center md:justify-start space-x-4 text-xl">
               <a
                 href="mailto:info@freelancetask.com"
@@ -118,6 +126,22 @@ const Footer = () => {
                 className="hover:text-gray-800 dark:hover:text-white"
               >
                 <FaGithub />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-700"
+              >
+                <FaLinkedin />
               </a>
             </div>
           </div>

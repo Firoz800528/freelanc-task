@@ -18,6 +18,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import TaskBids from "./pages/TaskBids";
 import NotFound from "./components/NotFound";
 import LoadingSpinner from "./components/LoadingSpinner";
+import Terms from "./pages/Terms";
 
 function AppWithAuthCheck() {
   const { loadingAuth } = useContext(AuthContext);
@@ -36,6 +37,7 @@ function AppWithAuthCheck() {
         <Route path="/browse-tasks" element={<BrowseTasks />} />
         <Route path="/my-tasks" element={<MyPostedTasks />} />
         <Route path="/task-bids/:id" element={<TaskBids />} />
+        <Route path="terms" element={<Terms />} />
 
         <Route
           path="/add-task"
