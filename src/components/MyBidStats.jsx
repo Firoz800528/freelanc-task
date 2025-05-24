@@ -22,8 +22,7 @@ const MyBidStats = () => {
 
   return (
     <div className="p-4 bg-white shadow rounded">
-      <h2 className="text-xl font-semibold mb-2">My Total Bids</h2>
-      <p className="text-lg">{bidCount !== null ? bidCount : "Loading..."}</p>
+      <p className="text-2xl font-semibold">You bid for <span className="text-green-600">{bidCount !== null ? bidCount : "Loading..."}</span> opportunities</p>
     </div>
   );
 };
