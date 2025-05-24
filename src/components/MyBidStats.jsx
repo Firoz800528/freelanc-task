@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuth"; // or however you get the user
+import { useAuth } from "../hooks/useAuth";
 
 const MyBidStats = () => {
-  const { user } = useAuth(); // assume user.email is available
+  const { user } = useAuth();
   const [bidCount, setBidCount] = useState(null);
 
   useEffect(() => {
@@ -21,8 +21,14 @@ const MyBidStats = () => {
   }, [user]);
 
   return (
-    <div className="p-4 bg-white shadow rounded">
-      <p className="text-2xl font-semibold">You bid for <span className="text-green-600">{bidCount !== null ? bidCount : "Loading..."}</span> opportunities</p>
+    <div className="p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-800 shadow rounded w-full max-w-xl mx-auto">
+      <p className="text-lg sm:text-xl md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-100">
+        You bid for{" "}
+        <span className="text-green-600 dark:text-green-400">
+          {bidCount !== null ? bidCount : "Loading..."}
+        </span>{" "}
+        opportunities
+      </p>
     </div>
   );
 };

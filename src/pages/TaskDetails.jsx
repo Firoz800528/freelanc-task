@@ -48,8 +48,8 @@ const TaskDetails = () => {
     setIsBidding(true);
 
     const amountStr = prompt("Enter your expected bid amount (USD):");
-
     const amount = parseFloat(amountStr);
+
     if (isNaN(amount) || amount <= 0) {
       toast.error("Invalid bid amount");
       setIsBidding(false);
@@ -85,46 +85,36 @@ const TaskDetails = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      {/* Display user's total bids */}
+    <div className="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      {/* Bid Stats */}
       <div className="mb-6">
         <MyBidStats />
       </div>
-      
-      <h2 className="text-3xl font-bold mb-4">{task.title}</h2>
-      <p className="mb-2">
-        <strong>Category:</strong> {task.category}
-      </p>
-      <p className="mb-2">
-        <strong>Description:</strong> {task.description}
-      </p>
-      <p className="mb-2">
-        <strong>Deadline:</strong>{" "}
-        {new Date(task.deadline).toLocaleDateString()}
-      </p>
-      <p className="mb-2">
-        <strong>Budget:</strong> ${task.budget}
-      </p>
-      <p className="mb-2">
-        <strong>Bids:</strong> {task.bidsCount || 0}
-      </p>
 
-      <div className="mb-4">
-        <p>
-          <strong>Posted by:</strong> {task.userName || "N/A"}
-        </p>
-        <p>
-          <strong>Email:</strong> {task.userEmail || "N/A"}
-        </p>
+      {/* Task Title */}
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4">{task.title}</h2>
+
+      {/* Task Details */}
+      <div className="space-y-2 text-sm sm:text-base">
+        <p><strong>Category:</strong> {task.category}</p>
+        <p><strong>Description:</strong> {task.description}</p>
+        <p><strong>Deadline:</strong> {new Date(task.deadline).toLocaleDateString()}</p>
+        <p><strong>Budget:</strong> ${task.budget}</p>
+        <p><strong>Bids:</strong> {task.bidsCount || 0}</p>
+        <p><strong>Posted by:</strong> {task.userName || "N/A"}</p>
+        <p><strong>Email:</strong> {task.userEmail || "N/A"}</p>
       </div>
 
-      <button
-        className="btn btn-primary"
-        onClick={handleBid}
-        disabled={isBidding}
-      >
-        {isBidding ? "Bidding..." : "Place a Bid"}
-      </button>
+      {/* Action Button */}
+      <div className="mt-6">
+        <button
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+          onClick={handleBid}
+          disabled={isBidding}
+        >
+          {isBidding ? "Bidding..." : "Place a Bid"}
+        </button>
+      </div>
     </div>
   );
 };

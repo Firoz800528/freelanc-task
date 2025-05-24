@@ -77,43 +77,50 @@ const Login = () => {
 
   return (
     <Fade triggerOnce>
-      <div className="max-w-md mx-auto p-6">
-        <h2 className="text-3xl font-bold mb-6">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-            className="input input-bordered w-full"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-            className="input input-bordered w-full"
-          />
-          <button type="submit" className="btn btn-primary w-full">
+      <div className="min-h-screen flex items-center justify-center px-4 sm:px-6">
+        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">
             Login
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+              required
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
+            />
+            <button
+              type="submit"
+              className="btn btn-primary w-full text-white text-sm sm:text-base"
+            >
+              Login
+            </button>
+          </form>
+
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-secondary w-full mt-4 text-sm sm:text-base"
+          >
+            Login with Google
           </button>
-        </form>
 
-        <button
-          onClick={handleGoogleLogin}
-          className="btn btn-secondary w-full mt-4"
-        >
-          Login with Google
-        </button>
-
-        <p className="mt-4 text-center">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-blue-600 underline">
-            Register here
-          </Link>
-        </p>
+          <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-300">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-blue-600 underline">
+              Register here
+            </Link>
+          </p>
+        </div>
       </div>
     </Fade>
   );

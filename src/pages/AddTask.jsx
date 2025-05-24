@@ -27,7 +27,7 @@ const AddTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!user || !user.email || !user.displayName) {
+    if (!user?.email || !user?.displayName) {
       toast.error("You must be logged in to post a task");
       return;
     }
@@ -48,9 +48,7 @@ const AddTask = () => {
     try {
       const res = await fetch("https://server-psi-khaki.vercel.app/tasks", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTask),
       });
 
@@ -69,15 +67,17 @@ const AddTask = () => {
   };
 
   return (
-    <div>
+    <div className="px-4 sm:px-6 lg:px-8 py-8 max-w-3xl mx-auto">
       <Fade triggerOnce>
-        <h1 className="text-4xl font-bold mb-6 text-center">Add New Task</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
+          Add New Task
+        </h1>
       </Fade>
 
       <Fade cascade damping={0.1} triggerOnce>
         <form
           onSubmit={handleSubmit}
-          className="max-w-lg mx-auto space-y-4"
+          className="space-y-5 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md"
           autoComplete="off"
         >
           <input
@@ -135,18 +135,20 @@ const AddTask = () => {
             required
           />
 
-          <input
-            type="email"
-            value={user?.email || ""}
-            readOnly
-            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
-          />
-          <input
-            type="text"
-            value={user?.displayName || ""}
-            readOnly
-            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="email"
+              value={user?.email || ""}
+              readOnly
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+            />
+            <input
+              type="text"
+              value={user?.displayName || ""}
+              readOnly
+              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+            />
+          </div>
 
           <button type="submit" className="btn btn-primary w-full">
             Add Task

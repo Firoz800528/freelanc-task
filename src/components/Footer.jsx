@@ -22,15 +22,16 @@ const Footer = () => {
   const isActive = (path) => location.pathname === path;
 
   const linkBase =
-    "inline-block mx-1 px-3 py-1 rounded-md transition-colors duration-200 cursor-pointer hover:underline";
-
+    "inline-block px-3 py-1 rounded-md transition-colors duration-200 cursor-pointer hover:underline";
   const linkActive =
     "font-bold border-b-2 border-gray-900 dark:border-white text-gray-900 dark:text-white";
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-10 mt-16">
+    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-10 pb-6 mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center sm:text-left">
+          
           
           <div>
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
@@ -41,9 +42,10 @@ const Footer = () => {
             </p>
           </div>
 
+         
           <div>
-            <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
-            <ul className="space-y-1 text-sm">
+            <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   to="/"
@@ -91,7 +93,7 @@ const Footer = () => {
                 <li>
                   <button
                     onClick={handleLogout}
-                    className={`${linkBase} text-left w-full`}
+                    className={`${linkBase}`}
                   >
                     Log out
                   </button>
@@ -100,19 +102,23 @@ const Footer = () => {
             </ul>
           </div>
 
+          
           <div>
-            <h4 className="text-lg font-semibold mb-2">Contact</h4>
-            <p className="text-sm">Email: info@freelancetask.com</p>
-            <p className="text-sm">Phone: +1 (555) 123-4567</p>
-            <p className="text-sm">Address: 123 Freelance St, Remote City</p>
-            <Link to="/terms" className="text-sm hover:underline font-bold block mt-2">
+            <h4 className="text-lg font-semibold mb-3">Contact</h4>
+            <ul className="space-y-1 text-sm">
+              <li>Email: info@freelancetask.com</li>
+              <li>Phone: +1 (555) 123-4567</li>
+              <li>Address: 123 Freelance St, Remote City</li>
+            </ul>
+            <Link to="/terms" className="text-sm hover:underline font-bold block mt-3">
               Terms & Conditions
             </Link>
           </div>
 
+          
           <div>
-            <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
-            <div className="flex justify-center md:justify-start space-x-4 text-xl">
+            <h4 className="text-lg font-semibold mb-3">Follow Us</h4>
+            <div className="flex justify-center sm:justify-start space-x-5 text-xl">
               <a
                 href="mailto:info@freelancetask.com"
                 className="hover:text-blue-600"
@@ -147,11 +153,10 @@ const Footer = () => {
           </div>
         </div>
 
+        
         <hr className="my-6 border-gray-300 dark:border-gray-700" />
-
         <p className="text-center text-sm">
-          &copy; {new Date().getFullYear()} FreelanceTask Marketplace. All
-          rights reserved.
+          &copy; {new Date().getFullYear()} FreelanceTask Marketplace. All rights reserved.
         </p>
       </div>
     </footer>

@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -19,69 +21,90 @@ const Navbar = () => {
 
   const activeClass = ({ isActive }) =>
     isActive
-      ? "hover:underline font-bold border-b-2 border-white"
+      ? "text-white font-bold underline"
       : "hover:underline";
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   return (
-    <nav className="bg-gray-800 text-white px-4 py-2 flex justify-between items-center">
-      <NavLink to="/" className="font-bold text-3xl">
-        Freelance<span className="text-[#432DD7]">Task</span> 
-      </NavLink>
-
-      <div className="flex items-center space-x-4">
-        <NavLink to="/" className={activeClass}>
-          Home
-        </NavLink>
-        <NavLink to="/browse-tasks" className={activeClass}>
-          Browse Tasks
+    <nav className="bg-gray-800 text-white px-4 py-3 shadow-md">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        
+        <NavLink to="/" className="font-bold text-2xl sm:text-3xl">
+          Freelance<span className="text-[#432DD7]">Task</span>
         </NavLink>
 
-        {user && (
-          <>
-            <NavLink to="/add-task" className={activeClass}>
-              Add Task
-            </NavLink>
-            <NavLink to="/my-posted-tasks" className={activeClass}>
-              My Posted Tasks
-            </NavLink>
-          </>
-        )}
+        
+        <button
+          className="md:hidden text-2xl"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </button>
 
-        {!user ? (
-          <>
-            <NavLink to="/login" className={activeClass}>
-              Login
+        
+        <div
+          className={`flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full md:w-auto bg-gray-800 md:bg-transparent scale-z-200 transition-all duration-300 ease-in-out ${
+            menuOpen ? "block" : "hidden md:flex"
+          }`}
+        >
+          <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-6 p-4 md:p-0">
+            <NavLink to="/" className={activeClass}>
+              Home
             </NavLink>
-            <NavLink to="/register" className={activeClass}>
-              Signup
+            <NavLink to="/browse-tasks" className={activeClass}>
+              Browse Tasks
             </NavLink>
-          </>
-        ) : (
-          <>
-            {user.photoURL ? (
-              <NavLink to="/my-profile" className="relative group">
-                <img
-                  src={user.photoURL}
-                  alt="User"
-                  className="w-8 h-8 rounded-full border-2 border-white cursor-pointer"
-                />
-                <div className="absolute bottom-full -mb-20 hidden group-hover:block bg-white text-black px-2 py-1 text-sm rounded shadow-lg">
-                  {user.displayName || "My Profile"}
-                </div>
-              </NavLink>
-            ) : (
-              <NavLink
-                to="/my-profile"
-                className="text-sm hover:underline"
-              >
-                {user.displayName || "My Profile"}
-              </NavLink>
+
+            {user && (
+              <>
+                <NavLink to="/add-task" className={activeClass}>
+                  Add Task
+                </NavLink>
+                <NavLink to="/my-posted-tasks" className={activeClass}>
+                  My Posted Tasks
+                </NavLink>
+              </>
             )}
-            <button onClick={handleLogout} className="hover:underline">
-              Log out
-            </button>
-          </>
-        )}
+
+            {!user ? (
+              <>
+                <NavLink to="/login" className={activeClass}>
+                  Login
+                </NavLink>
+                <NavLink to="/register" className={activeClass}>
+                  Signup
+                </NavLink>
+              </>
+            ) : (
+              <>
+                {user.photoURL ? (
+                  <NavLink to="/my-profile" className="relative group">
+                    <img
+                      src={user.photoURL}
+                      alt="User"
+                      className="w-8 h-8 rounded-full border-2 border-white cursor-pointer"
+                    />
+                    <div className="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black px-3 py-1 text-sm rounded shadow-lg">
+                      {user.displayName || "My Profile"}
+                    </div>
+                  </NavLink>
+                ) : (
+                  <NavLink to="/my-profile" className="text-sm hover:underline">
+                    {user.displayName || "My Profile"}
+                  </NavLink>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="hover:underline text-left"
+                >
+                  Log out
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </nav>
   );

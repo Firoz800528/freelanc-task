@@ -104,13 +104,13 @@ const Register = () => {
 
   return (
     <Fade triggerOnce>
-      <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow rounded">
-        <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
+      <div className="w-full max-w-md mx-auto mt-10 px-4 sm:px-6 lg:px-8 py-8 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded text-sm sm:text-base"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -118,14 +118,14 @@ const Register = () => {
           <input
             type="text"
             placeholder="Photo URL"
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded text-sm sm:text-base"
             value={photoURL}
             onChange={(e) => setPhotoURL(e.target.value)}
           />
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded text-sm sm:text-base"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -133,7 +133,7 @@ const Register = () => {
           <input
             type="password"
             placeholder="Password"
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded text-sm sm:text-base"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -141,20 +141,20 @@ const Register = () => {
           <input
             type="password"
             placeholder="Confirm Password"
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border rounded text-sm sm:text-base"
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             required
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition duration-200 text-sm sm:text-base"
           >
             Register
           </button>
         </form>
 
-        <div className="text-center mt-4">
+        <div className="text-center mt-4 text-sm sm:text-base">
           <p>
             Already have an account?{" "}
             <Link to="/login" className="text-blue-600 hover:underline">
@@ -166,7 +166,7 @@ const Register = () => {
         <div className="text-center mt-4">
           <button
             onClick={handleGoogleLogin}
-            className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
+            className="w-full bg-red-500 text-white py-3 rounded hover:bg-red-600 transition duration-200 text-sm sm:text-base"
           >
             Continue with Google
           </button>
