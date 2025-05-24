@@ -90,11 +90,7 @@ const TaskDetails = () => {
       <div className="mb-6">
         <MyBidStats />
       </div>
-
-      <p className="mb-4 text-lg font-semibold text-center">
-        You bid for {task.bidsCount || 0} opportunities.
-      </p>
-
+      
       <h2 className="text-3xl font-bold mb-4">{task.title}</h2>
       <p className="mb-2">
         <strong>Category:</strong> {task.category}
