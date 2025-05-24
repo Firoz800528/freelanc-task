@@ -14,7 +14,7 @@ const UpdateTask = () => {
   useEffect(() => {
     const fetchTask = async () => {
       const token = await user.getIdToken();
-      const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +43,7 @@ const UpdateTask = () => {
     };
 
     const token = await user.getIdToken();
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

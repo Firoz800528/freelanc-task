@@ -7,7 +7,7 @@ const BrowseTasks = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchTasks = () => {
-    fetch("http://localhost:5000/tasks")
+    fetch("https://server-psi-khaki.vercel.app/tasks")
       .then(res => res.json())
       .then(data => {
         setTasks(data);
@@ -24,7 +24,7 @@ const BrowseTasks = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch("http://localhost:5000/tasks", {
+      const res = await fetch("https://server-psi-khaki.vercel.app/tasks", {
         method: "DELETE",
       });
       const data = await res.json();

@@ -7,7 +7,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/tasks`)
+    fetch(`https://server-psi-khaki.vercel.app/tasks`)
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);

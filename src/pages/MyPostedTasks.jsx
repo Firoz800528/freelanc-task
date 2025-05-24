@@ -18,7 +18,7 @@ const MyPostedTasks = () => {
       try {
         const token = await user.getIdToken();
 
-        const res = await fetch("http://localhost:5000/my-tasks", {
+        const res = await fetch("https://server-psi-khaki.vercel.app/my-tasks", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -44,7 +44,7 @@ const MyPostedTasks = () => {
     try {
       const token = await user.getIdToken();
 
-      const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ const MyPostedTasks = () => {
       if (res.ok) {
         toast.success("Task deleted");
 
-        const refreshed = await fetch("http://localhost:5000/my-tasks", {
+        const refreshed = await fetch("https://server-psi-khaki.vercel.app/my-tasks", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

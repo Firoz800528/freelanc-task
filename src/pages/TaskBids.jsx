@@ -17,7 +17,7 @@ const TaskBids = () => {
       try {
         const token = await user.getIdToken();
 
-        const res = await fetch(`http://localhost:5000/tasks/${id}/bids`, {
+        const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}/bids`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +43,7 @@ const TaskBids = () => {
 
     try {
       const token = await user.getIdToken();
-      const res = await fetch(`http://localhost:5000/bids/${bidId}`, {
+      const res = await fetch(`https://server-psi-khaki.vercel.app/bids/${bidId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,7 +75,6 @@ const TaskBids = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Bidder Name</th>
               <th>Bidder Email</th>
               <th className="text-right">Amount</th>
               <th>Date</th>
@@ -87,7 +86,6 @@ const TaskBids = () => {
             {bids.map((bid, index) => (
               <tr key={bid._id}>
                 <td>{index + 1}</td>
-                <td>{bid.bidderName || "N/A"}</td>
                 <td>{bid.userEmail || "N/A"}</td>
                 <td className="text-right">${parseFloat(bid.amount).toFixed(2)}</td>
                 <td>{new Date(bid.date).toLocaleDateString()}</td>

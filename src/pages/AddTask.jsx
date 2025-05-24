@@ -46,7 +46,7 @@ const AddTask = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/tasks", {
+      const res = await fetch("https://server-psi-khaki.vercel.app/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

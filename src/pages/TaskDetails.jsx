@@ -14,7 +14,7 @@ const TaskDetails = () => {
     if (!id) return;
 
     setLoading(true);
-    fetch(`http://localhost:5000/tasks/${id}`)
+    fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
@@ -46,7 +46,6 @@ const TaskDetails = () => {
     setIsBidding(true);
 
     const amountStr = prompt("Enter your bid amount (USD):");
-    const message = prompt("Enter a short message for the task poster:");
 
     const amount = parseFloat(amountStr);
     if (isNaN(amount) || amount <= 0) {
@@ -55,14 +54,13 @@ const TaskDetails = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/tasks/${id}/bids`, {
+    fetch(`https://server-psi-khaki.vercel.app/tasks/${id}/bids`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
       amount,
-      message,
       userEmail: user.email,
       bidderName: user.displayName, 
     }),
