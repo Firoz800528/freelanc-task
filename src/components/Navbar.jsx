@@ -24,8 +24,8 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-800 text-white px-4 py-2 flex justify-between items-center">
-      <NavLink to="/" className="font-bold text-xl">
-        Freelance Marketplace
+      <NavLink to="/" className="font-bold text-3xl">
+        Freelance<span className="text-[#432DD7]">Task</span> 
       </NavLink>
 
       <div className="flex items-center space-x-4">

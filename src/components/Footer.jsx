@@ -34,7 +34,7 @@ const Footer = () => {
    
           <div>
             <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-              FreelanceTask
+              Freelance<span className="text-[#432DD7]">Task</span> 
             </h3>
             <p className="text-sm">
               Empowering freelancers and clients to collaborate and succeed.
