@@ -68,6 +68,28 @@ const UpdateTask = () => {
       <div className="bg-white shadow-md rounded-xl p-6 sm:p-8">
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Update Task</h1>
         <form onSubmit={handleUpdate} className="space-y-5">
+          {/* Read-only Name */}
+          <div>
+            <label className="block text-sm font-medium mb-1">User Name</label>
+            <input
+              type="text"
+              value={user.displayName || "N/A"}
+              readOnly
+              className="w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-3 py-2"
+            />
+          </div>
+
+          {/* Read-only Email */}
+          <div>
+            <label className="block text-sm font-medium mb-1">User Email</label>
+            <input
+              type="email"
+              value={user.email}
+              readOnly
+              className="w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-3 py-2"
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-medium mb-1">Title</label>
             <input
