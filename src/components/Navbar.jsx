@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-800 text-white px-4 py-3 shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex flex-col justify-between items-center">
         
         <NavLink to="/" className="font-bold text-2xl sm:text-3xl">
           Freelance<span className="text-[#432DD7]">Task</span>
@@ -45,7 +45,7 @@ const Navbar = () => {
 
         
         <div
-          className={`flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full md:w-auto bg-gray-800 md:bg-transparent scale-z-200 transition-all duration-300 ease-in-out ${
+          className={`flex flex-col md:flex-row md:items-center md:static top-full left-0 w-full md:w-auto bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out ${
             menuOpen ? "block" : "hidden md:flex"
           }`}
         >
