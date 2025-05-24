@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
 
 const Register = () => {
@@ -14,17 +14,35 @@ const Register = () => {
   const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
 
+  const showSuccess = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: message,
+      timer: 2000,
+      showConfirmButton: false,
+    });
+  };
+
+  const showError = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+    });
+  };
+
   const validatePassword = (password) => {
     if (password.length < 6) {
-      toast.error("Password must be at least 6 characters");
+      showError("Password must be at least 6 characters");
       return false;
     }
     if (!/[A-Z]/.test(password)) {
-      toast.error("Password must contain at least one uppercase letter");
+      showError("Password must contain at least one uppercase letter");
       return false;
     }
     if (!/[a-z]/.test(password)) {
-      toast.error("Password must contain at least one lowercase letter");
+      showError("Password must contain at least one lowercase letter");
       return false;
     }
     return true;
@@ -34,7 +52,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirm) {
-      toast.error("Passwords do not match");
+      showError("Passwords do not match");
       return;
     }
 
@@ -49,25 +67,43 @@ const Register = () => {
         photoURL: photoURL,
       });
 
-      toast.success("Registration successful!");
+      showSuccess("Registration successful!");
       navigate("/");
     } catch (err) {
-      toast.error(err.message || "Registration failed");
+      let msg;
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          msg = "Email is already in use.";
+          break;
+        case "auth/invalid-email":
+          msg = "Invalid email format.";
+          break;
+        case "auth/weak-password":
+          msg = "Password is too weak.";
+          break;
+        default:
+          msg = "Registration failed. Please try again.";
+      }
+      showError(msg);
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      toast.success("Google login successful!");
+      showSuccess("Google login successful!");
       navigate("/");
     } catch (err) {
-      toast.error(err.message || "Google login failed");
+      const msg =
+        err.code === "auth/popup-closed-by-user"
+          ? "Google login popup closed. Try again."
+          : "Google login failed. Please try again.";
+      showError(msg);
     }
   };
 
   return (
-    <Fade triggerOnce> 
+    <Fade triggerOnce>
       <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow rounded">
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

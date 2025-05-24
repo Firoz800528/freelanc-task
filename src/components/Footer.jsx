@@ -66,7 +66,7 @@ const Footer = () => {
                   to="/add-task"
                   className={`${linkBase} ${isActive("/add-task") ? linkActive : ""}`}
                 >
-                  Post a Task
+                  Add Task
                 </Link>
               </li>
 

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Fade } from "react-awesome-reveal"; 
+import { Fade } from "react-awesome-reveal";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -19,14 +22,45 @@ const Home = () => {
 
   return (
     <div>
-      <Fade triggerOnce>
-        <section className="bg-blue-600 text-white py-16 text-center">
-          <h1 className="text-4xl font-bold mb-4">Find Freelancers Fast</h1>
-          <p className="text-lg max-w-2xl mx-auto">
-            Post your task and get the best freelancers to bid on it. Quick, easy, and secure.
-          </p>
-        </section>
-      </Fade>
+      <Carousel
+  showThumbs={false}
+  autoPlay
+  infiniteLoop
+  interval={2000}
+  showStatus={false}
+>
+  <div className="bg-blue-600 text-white py-20 px-6 text-center">
+    <h1 className="text-4xl font-bold mb-4">Find Freelancers Fast</h1>
+    <p className="text-lg max-w-2xl mx-auto">
+      Post your task and get competitive bids from top freelancers.
+    </p>
+  </div>
+  <div className="bg-blue-700 text-white py-20 px-6 text-center">
+    <h1 className="text-4xl font-bold mb-4">Post Tasks with Ease</h1>
+    <p className="text-lg max-w-2xl mx-auto">
+      Posting a task is simple and takes just a minute. Start now.
+    </p>
+  </div>
+  <div className="bg-blue-800 text-white py-20 px-6 text-center">
+    <h1 className="text-4xl font-bold mb-4">Secure and Reliable</h1>
+    <p className="text-lg max-w-2xl mx-auto">
+      Enjoy a secure and reliable platform for all your freelance needs.
+    </p>
+  </div>
+  <div className="bg-blue-900 text-white py-20 px-6 text-center">
+    <h1 className="text-4xl font-bold mb-4">Support When You Need It</h1>
+    <p className="text-lg max-w-2xl mx-auto">
+      Our team is here to help you every step of the way.
+    </p>
+  </div>
+  <div className="bg-indigo-700 text-white py-20 px-6 text-center">
+    <h1 className="text-4xl font-bold mb-4">Trusted by Thousands</h1>
+    <p className="text-lg max-w-2xl mx-auto">
+      Join a growing community of users who get work done every day.
+    </p>
+  </div>
+</Carousel>
+
 
       <section className="max-w-6xl mx-auto p-6">
         <Fade triggerOnce>
@@ -34,7 +68,7 @@ const Home = () => {
         </Fade>
 
         {loading ? (
-          <p>Loading tasks...</p>
+          <LoadingSpinner />
         ) : tasks.length === 0 ? (
           <p>No tasks posted yet.</p>
         ) : (

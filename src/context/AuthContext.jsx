@@ -1,4 +1,3 @@
-
 import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -14,9 +13,7 @@ import { auth } from "../firebase.config";
 export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider();
-googleProvider.setCustomParameters({
-  prompt: "select_account",
-});
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -25,26 +22,11 @@ export const AuthProvider = ({ children }) => {
   const register = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
-const login = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    setUser(userCredential.user);
-    console.log("Logged in:", userCredential.user);
-  } catch (error) {
-    console.error("Login error:", error.code, error.message);
-    alert("Login failed: " + error.message);
-  }
-};
+  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
-
-
-
-  const loginWithGoogle = () =>
-    signInWithPopup(auth, googleProvider);
-
+  const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
 
   const logout = () => signOut(auth);
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -57,15 +39,7 @@ const login = async (email, password) => {
 
   return (
     <AuthContext.Provider
-      value={{
-        user,
-        loadingAuth,
-        register,
-        login,
-        logout,
-        loginWithGoogle,
-        updateProfile,
-      }}
+      value={{ user, loadingAuth, register, login, logout, loginWithGoogle }}
     >
       {children}
     </AuthContext.Provider>
