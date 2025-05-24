@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
+import MyBidStats from "../components/MyBidStats";
 
 const TaskDetails = () => {
   const { id } = useParams();
@@ -38,14 +40,14 @@ const TaskDetails = () => {
 
   if (loadingAuth) return <div className="p-4">Checking authentication...</div>;
   if (!user) return <Navigate to="/login" replace />;
-  if (loading) return <div className="p-4">Loading task details...</div>;
+  if (loading) return <div className="p-4"><LoadingSpinner /></div>;
   if (!task) return <div className="p-4">No task details found.</div>;
 
   const handleBid = () => {
     if (isBidding) return;
     setIsBidding(true);
 
-    const amountStr = prompt("Enter your bid amount (USD):");
+    const amountStr = prompt("Enter your expected bid amount (USD):");
 
     const amount = parseFloat(amountStr);
     if (isNaN(amount) || amount <= 0) {
@@ -60,11 +62,10 @@ const TaskDetails = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-      amount,
-      userEmail: user.email,
-      bidderName: user.displayName, 
-    }),
-
+        amount,
+        userEmail: user.email,
+        bidderName: user.displayName,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -85,6 +86,11 @@ const TaskDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
+      {/* Display user's total bids */}
+      <div className="mb-6">
+        <MyBidStats />
+      </div>
+
       <p className="mb-4 text-lg font-semibold text-center">
         You bid for {task.bidsCount || 0} opportunities.
       </p>

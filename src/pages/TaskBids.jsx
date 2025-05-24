@@ -75,8 +75,8 @@ const TaskBids = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Bidder Email</th>
-              <th className="text-right">Amount</th>
+              <th >Bidder Email</th>
+              <th className="text-center">Expected Amount</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -87,7 +87,7 @@ const TaskBids = () => {
               <tr key={bid._id}>
                 <td>{index + 1}</td>
                 <td>{bid.userEmail || "N/A"}</td>
-                <td className="text-right">${parseFloat(bid.amount).toFixed(2)}</td>
+                <td className="text-center">${parseFloat(bid.amount).toFixed(2)}</td>
                 <td>{new Date(bid.date).toLocaleDateString()}</td>
                 <td>
                   <button
