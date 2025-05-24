@@ -85,7 +85,7 @@ const Footer = () => {
                       to="/register"
                       className={`${linkBase} ${isActive("/register") ? linkActive : ""}`}
                     >
-                      Signup
+                      SignUp
                     </Link>
                   </li>
                 </>

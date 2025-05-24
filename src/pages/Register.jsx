@@ -148,7 +148,7 @@ const Register = () => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition duration-200 text-sm sm:text-base"
+            className="w-full bg-blue-600 cursor-pointer text-white py-3 rounded hover:bg-blue-700 transition duration-200 text-sm sm:text-base"
           >
             Register
           </button>
@@ -166,7 +166,7 @@ const Register = () => {
         <div className="text-center mt-4">
           <button
             onClick={handleGoogleLogin}
-            className="w-full bg-red-500 text-white py-3 rounded hover:bg-red-600 transition duration-200 text-sm sm:text-base"
+            className="w-full bg-red-500 text-white cursor-pointer py-3 rounded hover:bg-red-600 transition duration-200 text-sm sm:text-base"
           >
             Continue with Google
           </button>

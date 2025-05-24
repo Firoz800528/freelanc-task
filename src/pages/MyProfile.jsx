@@ -31,7 +31,7 @@ const MyProfile = () => {
 
           <button
             onClick={() => navigate("/update-profile")}
-            className="mt-4 px-6 py-2 text-sm sm:text-base bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
+            className="mt-4 px-6 py-2 text-sm sm:text-base cursor-pointer bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
           >
             Update Profile
           </button>

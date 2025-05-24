@@ -76,7 +76,7 @@ const Navbar = () => {
             {!user ? (
               <>
                 <NavLink to="/login" className={activeClass}>Login</NavLink>
-                <NavLink to="/register" className={activeClass}>Signup</NavLink>
+                <NavLink to="/register" className={activeClass}>SignUp</NavLink>
               </>
             ) : (
               <>
@@ -98,7 +98,7 @@ const Navbar = () => {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="hover:underline text-left"
+                  className="hover:underline cursor-pointer text-left"
                 >
                   Log out
                 </button>

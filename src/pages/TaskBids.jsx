@@ -100,7 +100,7 @@ const TaskBids = () => {
                   </td>
                   <td className="px-4 py-2">
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white text-xs sm:text-sm px-3 py-1 rounded"
+                      className="bg-red-500 hover:bg-red-600 cursor-pointer text-white text-xs sm:text-sm px-3 py-1 rounded"
                       onClick={() => handleDelete(bid._id)}
                     >
                       Delete

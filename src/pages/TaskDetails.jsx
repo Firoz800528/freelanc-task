@@ -86,15 +86,13 @@ const TaskDetails = () => {
 
   return (
     <div className="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      {/* Bid Stats */}
+  
       <div className="mb-6">
         <MyBidStats />
       </div>
 
-      {/* Task Title */}
       <h2 className="text-2xl sm:text-3xl font-bold mb-4">{task.title}</h2>
 
-      {/* Task Details */}
       <div className="space-y-2 text-sm sm:text-base">
         <p><strong>Category:</strong> {task.category}</p>
         <p><strong>Description:</strong> {task.description}</p>
@@ -105,10 +103,9 @@ const TaskDetails = () => {
         <p><strong>Email:</strong> {task.userEmail || "N/A"}</p>
       </div>
 
-      {/* Action Button */}
       <div className="mt-6">
         <button
-          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+          className="w-full sm:w-auto bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
           onClick={handleBid}
           disabled={isBidding}
         >
