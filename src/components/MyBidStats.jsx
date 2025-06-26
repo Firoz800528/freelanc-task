@@ -6,11 +6,12 @@ const MyBidStats = () => {
   const [bidCount, setBidCount] = useState(null);
 
   useEffect(() => {
+    console.log("User email:", user?.email);
     const fetchBidCount = async () => {
       if (!user?.email) return;
 
       const res = await fetch(
-        `http://localhost:5000/bids/user/count?email=${encodeURIComponent(user.email)}`
+        `https://server-4f8p.vercel.app/bids/user/count?email=${encodeURIComponent(user.email)}`
       );
 
       const data = await res.json();

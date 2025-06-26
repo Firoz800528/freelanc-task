@@ -9,22 +9,28 @@ const UpdateTask = () => {
   const navigate = useNavigate();
   const [task, setTask] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
 
   useEffect(() => {
     const fetchTask = async () => {
-      const token = await user.getIdToken();
-      const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setTask(data);
-      } else {
-        toast.error(data.error || "Failed to load task");
+      try {
+        const token = await user.getIdToken();
+        const res = await fetch(`https://server-4f8p.vercel.app/tasks/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        if (res.ok) {
+          setTask(data);
+        } else {
+          toast.error(data.error || "Failed to load task");
+        }
+      } catch (err) {
+        toast.error("Failed to load task");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     if (user) fetchTask();
@@ -41,106 +47,203 @@ const UpdateTask = () => {
       category: form.category.value,
     };
 
-    const token = await user.getIdToken();
-    const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updatedTask),
-    });
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(`https://server-4f8p.vercel.app/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedTask),
+      });
 
-    const data = await res.json();
-    if (res.ok) {
-      toast.success("Task updated successfully");
-      navigate("/my-posted-tasks");
-    } else {
-      toast.error(data.error || "Failed to update task");
+      const data = await res.json();
+      if (res.ok) {
+        toast.success("Task updated successfully");
+        navigate("/my-posted-tasks");
+      } else {
+        toast.error(data.error || "Failed to update task");
+      }
+    } catch {
+      toast.error("Failed to update task");
     }
   };
 
-  if (loading) return <p className="p-4 text-center">Loading...</p>;
-  if (!task) return <p className="p-4 text-center">Task not found</p>;
+  if (loading)
+    return (
+      <p
+        className={`p-4 text-center ${
+          theme === "dark" ? "text-white" : "text-gray-800"
+        }`}
+      >
+        Loading...
+      </p>
+    );
+  if (!task)
+    return (
+      <p
+        className={`p-4 text-center ${
+          theme === "dark" ? "text-white" : "text-gray-800"
+        }`}
+      >
+        Task not found
+      </p>
+    );
+
+  const inputBaseClasses =
+    "w-full rounded-lg px-3 py-2 border focus:outline-none transition-colors duration-200 ";
+  const inputLightClasses = "bg-gray-100 text-gray-700 border-gray-300 focus:ring-2 focus:ring-blue-500";
+  const inputDarkClasses = "bg-gray-700 text-gray-200 border-gray-600 focus:ring-2 focus:ring-blue-400";
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="bg-white shadow-md rounded-xl p-6 sm:p-8">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Update Task</h1>
+    <div
+      className={`max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10 transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900" : "bg-white"
+      }`}
+    >
+      <div
+        className={`shadow-md rounded-xl p-6 sm:p-8 ${
+          theme === "dark" ? "bg-gray-800" : "bg-white"
+        }`}
+      >
+        <h1
+          className={`text-2xl sm:text-3xl font-bold mb-6 text-center ${
+            theme === "dark" ? "text-white" : "text-gray-900"
+          }`}
+        >
+          Update Task
+        </h1>
         <form onSubmit={handleUpdate} className="space-y-5">
           {/* Read-only Name */}
           <div>
-            <label className="block text-sm font-medium mb-1">User Name</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              User Name
+            </label>
             <input
               type="text"
               value={user.displayName || "N/A"}
               readOnly
-              className="w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-3 py-2"
+              className={`${inputBaseClasses} ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              } cursor-not-allowed`}
             />
           </div>
 
           {/* Read-only Email */}
           <div>
-            <label className="block text-sm font-medium mb-1">User Email</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              User Email
+            </label>
             <input
               type="email"
               value={user.email}
               readOnly
-              className="w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-3 py-2"
+              className={`${inputBaseClasses} ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              } cursor-not-allowed`}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Title</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Title
+            </label>
             <input
               name="title"
               defaultValue={task.title}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${inputBaseClasses} ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              }`}
               placeholder="Title"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Description</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Description
+            </label>
             <textarea
               name="description"
               defaultValue={task.description}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${inputBaseClasses} h-32 resize-none ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              }`}
               placeholder="Description"
               required
             ></textarea>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Deadline</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Deadline
+            </label>
             <input
               type="date"
               name="deadline"
               defaultValue={task.deadline.split("T")[0]}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${inputBaseClasses} ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              }`}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Budget (USD)</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Budget (USD)
+            </label>
             <input
               type="number"
               name="budget"
               defaultValue={task.budget}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${inputBaseClasses} ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              }`}
               placeholder="Budget"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Category</label>
+            <label
+              className={`block text-sm font-medium mb-1 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Category
+            </label>
             <input
               name="category"
               defaultValue={task.category}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${inputBaseClasses} ${
+                theme === "dark" ? inputDarkClasses : inputLightClasses
+              }`}
               placeholder="Category"
               required
             />

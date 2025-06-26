@@ -17,7 +17,7 @@ const TaskBids = () => {
       try {
         const token = await user.getIdToken();
 
-        const res = await fetch(`https://server-psi-khaki.vercel.app/tasks/${id}/bids`, {
+        const res = await fetch(`https://server-4f8p.vercel.app/tasks/${id}/bids`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +43,7 @@ const TaskBids = () => {
 
     try {
       const token = await user.getIdToken();
-      const res = await fetch(`https://server-psi-khaki.vercel.app/bids/${bidId}`, {
+      const res = await fetch(`https://server-4f8p.vercel.app/bids/${bidId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

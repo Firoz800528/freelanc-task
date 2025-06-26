@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -7,6 +7,14 @@ import { Fade } from "react-awesome-reveal";
 const AddTask = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+
+  // Optional: Sync theme if you have a global theme context or toggle elsewhere
+  // useEffect(() => {
+  //   const storedTheme = localStorage.getItem("theme") || "light";
+  //   setTheme(storedTheme);
+  // }, []);
 
   const [form, setForm] = useState({
     title: "",
@@ -46,7 +54,7 @@ const AddTask = () => {
     };
 
     try {
-      const res = await fetch("https://server-psi-khaki.vercel.app/tasks", {
+      const res = await fetch("https://server-4f8p.vercel.app/tasks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTask),
@@ -67,24 +75,32 @@ const AddTask = () => {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-8 max-w-3xl mx-auto">
+    <div
+      className={`px-4 sm:px-6 lg:px-8 py-8 max-w-3xl mx-auto min-h-screen transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"
+      }`}
+    >
       <Fade triggerOnce>
-        <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
-          Add New Task
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">Add New Task</h1>
       </Fade>
 
       <Fade cascade damping={0.1} triggerOnce>
         <form
           onSubmit={handleSubmit}
-          className="space-y-5 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md"
           autoComplete="off"
+          className={`space-y-5 p-6 rounded-lg shadow-md transition-colors duration-300 ${
+            theme === "dark" ? "bg-gray-800" : "bg-white"
+          }`}
         >
           <input
             type="text"
             name="title"
             placeholder="Task Title"
-            className="input input-bordered w-full"
+            className={`input input-bordered w-full transition-colors duration-300 ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white placeholder-gray-300"
+                : "bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-600"
+            }`}
             value={form.title}
             onChange={handleChange}
             required
@@ -92,12 +108,18 @@ const AddTask = () => {
 
           <select
             name="category"
-            className="select select-bordered w-full"
+            className={`select select-bordered w-full transition-colors duration-300 ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-gray-100 border-gray-300 text-gray-900"
+            }`}
             value={form.category}
             onChange={handleChange}
             required
           >
-            <option value="">Select Category</option>
+            <option value="" className={theme === "dark" ? "bg-gray-700" : ""}>
+              Select Category
+            </option>
             <option value="Web Development">Web Development</option>
             <option value="Design">Design</option>
             <option value="Writing">Writing</option>
@@ -108,17 +130,25 @@ const AddTask = () => {
           <textarea
             name="description"
             placeholder="Description"
-            className="textarea textarea-bordered w-full"
+            rows={5}
+            className={`textarea textarea-bordered w-full transition-colors duration-300 ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white placeholder-gray-300"
+                : "bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-600"
+            }`}
             value={form.description}
             onChange={handleChange}
             required
-            rows={5}
           />
 
           <input
             type="date"
             name="deadline"
-            className="input input-bordered w-full"
+            className={`input input-bordered w-full transition-colors duration-300 ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white placeholder-gray-300"
+                : "bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-600"
+            }`}
             value={form.deadline}
             onChange={handleChange}
             required
@@ -128,10 +158,14 @@ const AddTask = () => {
             type="number"
             name="budget"
             placeholder="Budget"
-            className="input input-bordered w-full"
+            min="1"
+            className={`input input-bordered w-full transition-colors duration-300 ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white placeholder-gray-300"
+                : "bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-600"
+            }`}
             value={form.budget}
             onChange={handleChange}
-            min="1"
             required
           />
 
@@ -140,17 +174,30 @@ const AddTask = () => {
               type="email"
               value={user?.email || ""}
               readOnly
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+              className={`input input-bordered w-full cursor-not-allowed transition-colors duration-300 ${
+                theme === "dark"
+                  ? "bg-gray-600 border-gray-500 text-gray-300"
+                  : "bg-gray-100 border-gray-300 text-gray-900"
+              }`}
             />
             <input
               type="text"
               value={user?.displayName || ""}
               readOnly
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+              className={`input input-bordered w-full cursor-not-allowed transition-colors duration-300 ${
+                theme === "dark"
+                  ? "bg-gray-600 border-gray-500 text-gray-300"
+                  : "bg-gray-100 border-gray-300 text-gray-900"
+              }`}
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-full">
+          <button
+            type="submit"
+            className={`btn btn-primary w-full transition-colors duration-300 ${
+              theme === "dark" ? "bg-blue-700 hover:bg-blue-800" : ""
+            }`}
+          >
             Add Task
           </button>
         </form>

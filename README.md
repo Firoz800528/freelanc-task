@@ -5,7 +5,7 @@ A full-stack web platform that helps individuals find freelancers for small task
 ## 🔗 Live Site URLs
 
 - **Client site:** https://freelance-task-46d26.web.app/
-- **Server site:** https://server-psi-khaki.vercel.app/
+- **Server site:** https://server-4f8p.vercel.app/
 
 ---
 

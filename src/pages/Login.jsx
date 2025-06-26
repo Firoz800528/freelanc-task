@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
@@ -7,9 +7,25 @@ import { Fade } from "react-awesome-reveal";
 const Login = () => {
   const { login, loginWithGoogle } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  // Sync with localStorage
+  useEffect(() => {
+    const syncTheme = () => {
+      const stored = localStorage.getItem("theme") || "light";
+      setTheme(stored);
+    };
+    window.addEventListener("storage", syncTheme);
+    window.addEventListener("themeChange", syncTheme);
+    return () => {
+      window.removeEventListener("storage", syncTheme);
+      window.removeEventListener("themeChange", syncTheme);
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData((fd) => ({ ...fd, [e.target.name]: e.target.value }));
@@ -77,9 +93,17 @@ const Login = () => {
 
   return (
     <Fade triggerOnce>
-      <div className="min-h-screen flex items-center justify-center px-4 sm:px-6">
-        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sm:p-8">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">
+      <div
+        className={`min-h-screen flex items-center justify-center px-4 sm:px-6 transition-colors duration-300 ${
+          theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-800"
+        }`}
+      >
+        <div
+          className={`w-full max-w-md rounded-lg shadow-md p-6 sm:p-8 transition-colors duration-300 ${
+            theme === "dark" ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
             Login
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -89,7 +113,11 @@ const Login = () => {
               placeholder="Email"
               onChange={handleChange}
               required
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
+              className={`input input-bordered w-full ${
+                theme === "dark"
+                  ? "bg-gray-700 text-white border-gray-600"
+                  : "bg-gray-100 text-black"
+              }`}
             />
             <input
               type="password"
@@ -97,7 +125,11 @@ const Login = () => {
               placeholder="Password"
               onChange={handleChange}
               required
-              className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
+              className={`input input-bordered w-full ${
+                theme === "dark"
+                  ? "bg-gray-700 text-white border-gray-600"
+                  : "bg-gray-100 text-black"
+              }`}
             />
             <button
               type="submit"
@@ -114,7 +146,11 @@ const Login = () => {
             Login with Google
           </button>
 
-          <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-300">
+          <p
+            className={`mt-4 text-center text-sm ${
+              theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
             Don't have an account?{" "}
             <Link to="/register" className="text-blue-600 underline">
               Register here

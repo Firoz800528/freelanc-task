@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
@@ -12,7 +12,22 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
   const navigate = useNavigate();
+
+  // Sync theme from localStorage
+  useEffect(() => {
+    const syncTheme = () => {
+      const stored = localStorage.getItem("theme") || "light";
+      setTheme(stored);
+    };
+    window.addEventListener("storage", syncTheme);
+    window.addEventListener("themeChange", syncTheme);
+    return () => {
+      window.removeEventListener("storage", syncTheme);
+      window.removeEventListener("themeChange", syncTheme);
+    };
+  }, []);
 
   const showSuccess = (message) => {
     Swal.fire({
@@ -104,13 +119,23 @@ const Register = () => {
 
   return (
     <Fade triggerOnce>
-      <div className="w-full max-w-md mx-auto mt-10 px-4 sm:px-6 lg:px-8 py-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Register</h2>
+      <div
+        className={`w-full max-w-md mx-auto mt-10 px-4 sm:px-6 lg:px-8 py-8 shadow-lg rounded-lg transition-colors duration-300 ${
+          theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+        }`}
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
+          Register
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full p-3 border rounded text-sm sm:text-base"
+            className={`w-full p-3 border rounded text-sm sm:text-base ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-gray-100 border-gray-300 text-black"
+            }`}
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -118,14 +143,22 @@ const Register = () => {
           <input
             type="text"
             placeholder="Photo URL"
-            className="w-full p-3 border rounded text-sm sm:text-base"
+            className={`w-full p-3 border rounded text-sm sm:text-base ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-gray-100 border-gray-300 text-black"
+            }`}
             value={photoURL}
             onChange={(e) => setPhotoURL(e.target.value)}
           />
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 border rounded text-sm sm:text-base"
+            className={`w-full p-3 border rounded text-sm sm:text-base ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-gray-100 border-gray-300 text-black"
+            }`}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -133,7 +166,11 @@ const Register = () => {
           <input
             type="password"
             placeholder="Password"
-            className="w-full p-3 border rounded text-sm sm:text-base"
+            className={`w-full p-3 border rounded text-sm sm:text-base ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-gray-100 border-gray-300 text-black"
+            }`}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -141,7 +178,11 @@ const Register = () => {
           <input
             type="password"
             placeholder="Confirm Password"
-            className="w-full p-3 border rounded text-sm sm:text-base"
+            className={`w-full p-3 border rounded text-sm sm:text-base ${
+              theme === "dark"
+                ? "bg-gray-700 border-gray-600 text-white"
+                : "bg-gray-100 border-gray-300 text-black"
+            }`}
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             required
@@ -157,7 +198,7 @@ const Register = () => {
         <div className="text-center mt-4 text-sm sm:text-base">
           <p>
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline">
+            <Link to="/login" className="text-blue-500 hover:underline">
               Login here
             </Link>
           </p>

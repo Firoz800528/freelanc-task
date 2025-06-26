@@ -16,7 +16,7 @@ const TaskDetails = () => {
     if (!id) return;
 
     setLoading(true);
-    fetch(`https://server-psi-khaki.vercel.app/tasks/${id}`)
+    fetch(`https://server-4f8p.vercel.app/tasks/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
@@ -38,10 +38,10 @@ const TaskDetails = () => {
     fetchTask();
   }, [id]);
 
-  if (loadingAuth) return <div className="p-4">Checking authentication...</div>;
+  if (loadingAuth) return <div className="p-6 text-center text-gray-500">Checking authentication...</div>;
   if (!user) return <Navigate to="/login" replace />;
-  if (loading) return <div className="p-4"><LoadingSpinner /></div>;
-  if (!task) return <div className="p-4">No task details found.</div>;
+  if (loading) return <div className="p-6 text-center"><LoadingSpinner /></div>;
+  if (!task) return <div className="p-6 text-center text-red-500">No task details found.</div>;
 
   const handleBid = () => {
     if (isBidding) return;
@@ -56,7 +56,7 @@ const TaskDetails = () => {
       return;
     }
 
-    fetch(`https://server-psi-khaki.vercel.app/tasks/${id}/bids`, {
+    fetch(`https://server-4f8p.vercel.app/tasks/${id}/bids`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,31 +85,32 @@ const TaskDetails = () => {
   };
 
   return (
-    <div className="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 py-6">
-  
-      <div className="mb-6">
+    <div className="max-w-3xl mx-auto px-6 py-8 bg-white rounded-lg shadow-sm">
+      <div className="mb-8">
         <MyBidStats />
       </div>
 
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4">{task.title}</h2>
+      <h2 className="text-3xl font-semibold text-gray-800 mb-6 border-b pb-3">
+        {task.title}
+      </h2>
 
-      <div className="space-y-2 text-sm sm:text-base">
-        <p><strong>Category:</strong> {task.category}</p>
-        <p><strong>Description:</strong> {task.description}</p>
-        <p><strong>Deadline:</strong> {new Date(task.deadline).toLocaleDateString()}</p>
-        <p><strong>Budget:</strong> ${task.budget}</p>
-        <p><strong>Bids:</strong> {task.bidsCount || 0}</p>
-        <p><strong>Posted by:</strong> {task.userName || "N/A"}</p>
-        <p><strong>Email:</strong> {task.userEmail || "N/A"}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-sm sm:text-base text-gray-700">
+        <p><span className="font-medium text-gray-900">Category:</span> {task.category}</p>
+        <p><span className="font-medium text-gray-900">Deadline:</span> {new Date(task.deadline).toLocaleDateString()}</p>
+        <p className="sm:col-span-2"><span className="font-medium text-gray-900">Description:</span> {task.description}</p>
+        <p><span className="font-medium text-gray-900">Budget:</span> ${task.budget}</p>
+        <p><span className="font-medium text-gray-900">Bids:</span> {task.bidsCount || 0}</p>
+        <p><span className="font-medium text-gray-900">Posted by:</span> {task.userName || "N/A"}</p>
+        <p><span className="font-medium text-gray-900">Email:</span> {task.userEmail || "N/A"}</p>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-8">
         <button
-          className="w-full sm:w-auto bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold py-2 px-6 rounded-lg shadow-md disabled:opacity-60"
           onClick={handleBid}
           disabled={isBidding}
         >
-          {isBidding ? "Bidding..." : "Place a Bid"}
+          {isBidding ? "Submitting..." : "Place a Bid"}
         </button>
       </div>
     </div>
