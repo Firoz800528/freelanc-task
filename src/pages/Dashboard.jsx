@@ -41,16 +41,17 @@ const Dashboard = () => {
   className="flex flex-wrap sm:flex-nowrap overflow-x-auto no-scrollbar gap-3 sm:gap-6 border-b border-gray-300 dark:border-gray-700 mb-6 pb-2 sm:pb-0"
 >
   <NavLink to="/dashboard" end className={activeClass}>
-    Overview
+    <p className="border-r-2 pr-6">Overview</p>
   </NavLink>
   <NavLink to="/dashboard/my-profile" className={activeClass}>
-    My Profile
+  <p className="border-r-2 pr-6">My Profile</p>
+    
   </NavLink>
   <NavLink to="/dashboard/add-item" className={activeClass}>
-    Add Task
+    <p className="border-r-2 pr-6">Add Task</p>
   </NavLink>
   <NavLink to="/dashboard/my-items" className={activeClass}>
-    My Posted Tasks
+    <p className="border-r-2 pr-6">My Posted Tasks</p>
   </NavLink>
 </nav>
 

@@ -22,7 +22,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.6.0",
     "react-tooltip": "^5.28.1",
-    "sweetalert2": "^11.21.2",
+    "sweetalert2": "^11.22.1",
     "tailwindcss": "^4.1.7"
   },
   "devDependencies": {

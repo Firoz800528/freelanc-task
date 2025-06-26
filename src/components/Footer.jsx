@@ -74,48 +74,52 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className={`text-lg font-semibold mb-3 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-              Quick Links
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/" className={`${linkBase} ${isActive("/") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/browse-tasks" className={`${linkBase} ${isActive("/browse-tasks") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
-                  Browse Tasks
-                </Link>
-              </li>
-              <li>
-                <Link to="/add-task" className={`${linkBase} ${isActive("/add-task") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
-                  Add Task
-                </Link>
-              </li>
-              {!user ? (
-                <>
-                  <li>
-                    <Link to="/login" className={`${linkBase} ${isActive("/login") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
-                      Login
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/register" className={`${linkBase} ${isActive("/register") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
-                      SignUp
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <li>
-                  <button onClick={handleLogout} className={linkBase}>
-                    Log out
-                  </button>
-                </li>
-              )}
-            </ul>
-          </div>
+<div>
+  <h4 className={`text-lg font-semibold mb-3 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+    Quick Links
+  </h4>
+  <ul className="space-y-2 text-sm">
+    <li>
+      <Link to="/" className={`${linkBase} ${isActive("/") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+        Home
+      </Link>
+    </li>
+
+    {!user ? (
+      <>
+        <li>
+          <Link to="/login" className={`${linkBase} ${isActive("/login") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+            Login
+          </Link>
+        </li>
+        <li>
+          <Link to="/register" className={`${linkBase} ${isActive("/register") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+            Register
+          </Link>
+        </li>
+      </>
+    ) : (
+      <>
+        <li>
+          <Link to="/support" className={`${linkBase} ${isActive("/support") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+            Support
+          </Link>
+        </li>
+        <li>
+          <Link to="/about" className={`${linkBase} ${isActive("/about") ? linkActive : theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+            About
+          </Link>
+        </li>
+        <li>
+          <button onClick={handleLogout} className={`${linkBase} ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+            Log out
+          </button>
+        </li>
+      </>
+    )}
+  </ul>
+</div>
+
 
           {/* Contact */}
           <div>

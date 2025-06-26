@@ -1,83 +1,99 @@
-# 🚀 Freelance Task Marketplace
+# 📌 Freelance Task Marketplace
 
-A full-stack web platform that helps individuals find freelancers for small tasks and freelancers to find work opportunities. Users can post tasks, bid on tasks, and manage their posted tasks seamlessly.
-
-## 🔗 Live Site URLs
-
-- **Client site:** https://freelance-task-46d26.web.app/
-- **Server site:** https://server-4f8p.vercel.app/
+A full-stack MERN (MongoDB, Express.js, React, Node.js) freelance platform where clients can post tasks and freelancers can place bids. Authentication is secured using Firebase, and backend APIs are protected using environment variables. This project is fully responsive and optimized for an intuitive freelance experience.
 
 ---
 
-## 📌 Features
+## 🌐 Live Preview
 
-- 🔒 **Authentication & Authorization**
-  - Email/password & Google-based login
-  - Protected routes for task management
-
-- 📝 **Task Management (CRUD)**
-  - Post, update, delete tasks
-  - Only task owners can update/delete their tasks
-
-- 🔍 **Task Browsing & Details**
-  - Browse all available tasks
-  - See task details and bid on tasks
-
-- 📊 **User Dashboard**
-  - View tasks posted by the user
-  - Track bids, update and delete tasks
-
-- 📅 **Deadline Sorting & Filtering**
-  - Tasks are sorted by the nearest deadlines first
-  - Limited display for featured tasks on the home page
+🔗 **Live Site:** [https://freelance-task-46d26.web.app](https://freelance-task-46d26.web.app)   
 
 ---
 
-## 🖼 Pages & Routes
+## 🖼️ Screenshot
 
-| Page                | Route               | Protection     |
-|---------------------|---------------------|----------------|
-| Home                | `/`                 | Public         |
-| Add Task            | `/add-task`         | Protected      |
-| Browse Tasks        | `/browse-tasks`     | Public         |
-| Task Details        | `/task/:id`         | Protected      |
-| My Posted Tasks     | `/my-posted-tasks`  | Protected      |
-| Update Task         | `/update/:id`       | Protected      |
-| Login               | `/login`            | Public         |
-| Register            | `/register`         | Public         |
-| 404 Not Found       | `*`                 | Public         |
+![Freelance Task Platform Screenshot](https://i.imgur.com/i6Mc7jg.jpeg) 
 
 ---
 
-## 📱 Responsiveness
+## 🎯 Purpose
 
-The site is fully responsive and optimized for:
-
-- Mobile phones
-- Tablets
-- Desktop devices
+To develop a role-based freelance marketplace where:
+- Clients can post, manage, and delete freelance tasks
+- Freelancers can browse, filter, and bid on tasks
+- All users benefit from a secure and smooth platform experience
 
 ---
 
-## ⚙️ Technologies Used
+## 🚀 Key Features
 
-### Client (React)
+- 🔐 Login/register via Firebase Authentication
+- 🧾 Clients can post, update, and delete tasks
+- 🧑‍💻 Freelancers can view tasks and place bids
+- 📊 Dashboard with activity chart (favorites, bids, tasks)
+- 🔍 Filter by task type, budget, or posted date
+- 🔒 JWT-protected API endpoints
+- 📱 Mobile-friendly responsive UI
+
+---
+
+## 🛠️ Tech Stack
+
+### 🎨 Frontend
+
+- React
 - React Router DOM
+- Tailwind CSS
 - Firebase Authentication
-- Tailwind CSS + DaisyUI
-- React Toastify
-- Lottie-React (optional animation)
+- Axios
+- React Hot Toast
+- Recharts
 
-### Server (Node + Express)
+### ⚙️ Backend
+
+- Node.js
 - Express.js
-- MongoDB Native Driver
-- dotenv for env config
-- Vercel Deployment
+- MongoDB (Native driver)
+- dotenv
+- cors
 
 ---
 
-## 🔐 Environment Variables
+## 📦 Dependencies
 
-Create a `.env` file in both `client/` and `server/` directories:
+### Client-Side
 
-### Client:
+- `react`  
+- `react-dom`  
+- `react-router-dom`  
+- `firebase`  
+- `axios`  
+- `react-hot-toast`  
+- `recharts`
+
+### Server-Side
+
+- `express`  
+- `mongodb`  
+- `cors`  
+- `dotenv`
+
+---
+
+## 💻 Installation & Setup
+
+### Prerequisites
+- Node.js
+- npm
+- MongoDB Atlas account
+
+### 🔧 Clone and Run Locally
+
+#### 👉 Clone the repos
+
+```bash
+# Client
+git clone https://github.com/Firoz800528/freelanc-task.git
+cd freelance-task-client
+npm install
+npm run dev
